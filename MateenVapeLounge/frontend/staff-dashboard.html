@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Mateen VapeLounge — Staff</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#f59e0b">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="VapeLounge">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/staff-dashboard.css">
+</head>
+<body>
+    <div class="staff-shell">
+
+        <!-- ===================== Topbar ===================== -->
+        <header class="staff-topbar">
+            <div class="left">
+                <div class="brand-mark">
+                    <span class="logo-dot" aria-hidden="true"></span>
+                    <span class="brand-text">
+                        Mateen VapeLounge
+                        <small>Staff Console</small>
+                    </span>
+                </div>
+            </div>
+
+            <div class="center">
+                <span id="staffInitials" class="avatar avatar-sm">?</span>
+                <span class="greeting">Signed in as</span>
+                <span id="staffName">—</span>
+            </div>
+
+            <div class="right">
+                <button id="themeToggle" class="btn-icon" aria-label="Toggle theme">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <button id="logoutBtn" class="logout-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Sign out
+                </button>
+            </div>
+        </header>
+
+        <!-- ===================== Content ===================== -->
+        <main class="staff-content">
+
+            <!-- Action toggle -->
+            <section class="action-toggle">
+                <button class="action-tab active" data-action="refill">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 4H9z"/><path d="M7 6h10v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 12h10"/></svg>
+                    Record Refill
+                </button>
+                <button class="action-tab" data-action="sale">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    Record Sale
+                </button>
+            </section>
+
+            <!-- Refill action -->
+            <section id="refillCard" class="action-card">
+                <div class="action-head">
+                    <div>
+                        <h2>Record a refill</h2>
+                        <div class="subtitle">Customer brings their bottle / pod — fill it from open stock.</div>
+                    </div>
+                    <span class="badge badge-info badge-dot">Service</span>
+                </div>
+
+                <form id="refillForm" class="action-form" autocomplete="off">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <div class="field" style="margin:0;flex:1">
+                            <label for="refillCategory">Category</label>
+                            <select id="refillCategory" class="select" required>
+                                <option value="">— Select category —</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <div class="field" style="margin:0;flex:1">
+                            <label for="refillBrand">Brand</label>
+                            <select id="refillBrand" class="select" required disabled>
+                                <option value="">— Select category first —</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <div class="field" style="margin:0;flex:1">
+                            <label for="refillProduct">Flavor / Product</label>
+                            <select id="refillProduct" class="select" required disabled>
+                                <option value="">— Select brand first —</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">4</span>
+                        <div class="field" style="margin:0;flex:1">
+                            <label for="refillSize">Refill Size</label>
+                            <select id="refillSize" class="select" required disabled>
+                                <option value="">— Select product first —</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="refillCalc" class="action-calc">
+                        <div class="calc-row">
+                            <span class="calc-label">Volume</span>
+                            <span id="refillCalcMl" class="calc-value">—</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-label">Price per ml</span>
+                            <span id="refillCalcPpml" class="calc-value">—</span>
+                        </div>
+                        <div class="calc-row total">
+                            <span class="calc-label">Total</span>
+                            <span id="refillCalcTotal" class="calc-value total-value">—</span>
+                        </div>
+                    </div>
+
+                    <button id="refillSubmit" class="btn btn-primary btn-lg btn-block" type="submit" disabled>
+                        <span class="spin"></span>
+                        <span class="btn-label">Confirm Refill</span>
+                    </button>
+                </form>
+                <div id="refillFeedback" class="action-feedback" role="status"></div>
+            </section>
+
+            <!-- Sale action -->
+            <section id="saleCard" class="action-card hide">
+                <div class="action-head">
+                    <div>
+                        <h2>Record a sale</h2>
+                        <div class="subtitle">Sealed pods, devices, coils — anything off the shelf.</div>
+                    </div>
+                    <span class="badge badge-amber badge-dot">Sale</span>
+                </div>
+
+                <form id="saleForm" class="action-form" autocomplete="off">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <div class="field" style="margin:0;flex:1">
+                            <label for="saleCategory">Category</label>
+                            <select id="saleCategory" class="select" required>
+                                <option value="">— Select category —</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <div class="field" style="margin:0;flex:1">
+                            <label for="saleBrand">Brand</label>
+                            <select id="saleBrand" class="select" required disabled>
+                                <option value="">— Select category first —</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <div class="field" style="margin:0;flex:1">
+                            <label for="saleProduct">Product</label>
+                            <select id="saleProduct" class="select" required disabled>
+                                <option value="">— Select brand first —</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">4</span>
+                        <div class="field" style="margin:0;flex:1">
+                            <label for="saleQty">Quantity</label>
+                            <input type="number" id="saleQty" class="input" min="1" step="1" placeholder="1" required disabled>
+                        </div>
+                    </div>
+
+                    <div id="saleCalc" class="action-calc">
+                        <div class="calc-row">
+                            <span class="calc-label">Available stock</span>
+                            <span id="saleCalcStock" class="calc-value">—</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-label">Quantity</span>
+                            <span id="saleCalcQty" class="calc-value">—</span>
+                        </div>
+                        <div class="calc-row total">
+                            <span class="calc-label">Status</span>
+                            <span id="saleCalcStatus" class="calc-value">—</span>
+                        </div>
+                    </div>
+
+                    <button id="saleSubmit" class="btn btn-primary btn-lg btn-block" type="submit" disabled>
+                        <span class="spin"></span>
+                        <span class="btn-label">Confirm Sale</span>
+                    </button>
+                </form>
+                <div id="saleFeedback" class="action-feedback" role="status"></div>
+            </section>
+
+            <!-- Today's activity -->
+            <section class="my-activity">
+                <div class="summary-strip">
+                    <div class="stat-mini">
+                        <span class="label">My Refills Today</span>
+                        <span id="myRefillsCount" class="value">0</span>
+                    </div>
+                    <div class="stat-mini">
+                        <span class="label">My Sales Today</span>
+                        <span id="mySalesCount" class="value">0</span>
+                    </div>
+                    <div class="stat-mini">
+                        <span class="label">Units Sold</span>
+                        <span id="myUnits" class="value">0</span>
+                    </div>
+                    <div class="stat-mini">
+                        <span class="label">Total ml Refilled</span>
+                        <span id="myMl" class="value">0</span>
+                    </div>
+                </div>
+                <div id="myActivityBody"></div>
+            </section>
+
+            <!-- Stock overview -->
+            <section>
+                <div class="section-heading mb-4">
+                    <h3>Stock Overview</h3>
+                    <span class="meta">Live · grouped by category</span>
+                </div>
+                <div id="stockGroups"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/staff.js"></script>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Mateen VapeLounge — Owner Console</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#f59e0b">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="VapeLounge">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/owner-dashboard.css">
+</head>
+<body>
+    <div class="dashboard-shell">
+
+        <!-- ===================== Sidebar ===================== -->
+        <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+        <aside id="sidebar" class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">
+                    <span class="logo-dot" aria-hidden="true"></span>
+                    <span class="brand-text">
+                        Mateen VapeLounge
+                        <small>Owner Console</small>
+                    </span>
+                </div>
+            </div>
+
+            <nav>
+                <div class="nav-section">Workspace</div>
+                <ul class="nav-list">
+                    <li>
+                        <a href="#" class="nav-link active" data-tab="overview">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                            Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" data-tab="products">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                            Products
+                            <span id="sidebarLowCount" class="nav-count hide"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" data-tab="refill-sizes">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 4H9z"/><path d="M7 6h10v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 12h10"/></svg>
+                            Refill Sizes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" data-tab="purchases">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+                            Purchases
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" data-tab="staff">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            Staff
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" data-tab="audit">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            Audit Log
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" data-tab="settings">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="user-block">
+                <span id="userInitials" class="avatar avatar-sm">M</span>
+                <div class="user-meta">
+                    <div id="userName" class="user-name">—</div>
+                    <div class="user-role">Owner</div>
+                </div>
+                <button id="logoutBtn" class="logout-btn" title="Sign out" aria-label="Sign out">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ===================== Main ===================== -->
+        <main class="main">
+            <div class="topbar">
+                <div class="topbar-title">
+                    <button id="menuToggle" class="btn-icon menu-toggle" aria-label="Open menu" style="margin-right:10px">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    </button>
+                    <span id="pageCrumb" class="crumb">Overview</span>
+                    <h1 id="pageTitle">Overview</h1>
+                </div>
+
+                <div class="topbar-actions">
+                    <button id="notifBtn" class="btn-icon notif-btn" aria-label="Notifications">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        <span id="notifDot" class="notif-dot"></span>
+                    </button>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="content">
+
+                <!-- Stats grid: shown only on overview tab -->
+                <div id="statsGrid" class="stats-grid five">
+                    <div class="stat-card primary">
+                        <div class="stat-head">
+                            Today's Total Revenue
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div id="statTotalRevenue" class="stat-value"><span class="currency">PKR</span>0</div>
+                        <div id="footTotalCount" class="stat-foot">0 transactions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-head">
+                            Product Sales Today
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        </div>
+                        <div id="statProductRevenue" class="stat-value"><span class="currency">PKR</span>0</div>
+                        <div id="footProductCount" class="stat-foot">0 sales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-head">
+                            Refill Revenue Today
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 4H9z"/><path d="M7 6h10v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M7 12h10"/></svg>
+                        </div>
+                        <div id="statRefillRevenue" class="stat-value"><span class="currency">PKR</span>0</div>
+                        <div id="footRefillCount" class="stat-foot">0 refills</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-head">
+                            Stock Value
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        </div>
+                        <div id="statStockValue" class="stat-value"><span class="currency">PKR</span>0</div>
+                        <div id="footProfit" class="stat-foot">Potential profit: —</div>
+                    </div>
+                    <div class="stat-card alert">
+                        <div class="stat-head">
+                            Low Stock
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <div id="statLow" class="stat-value">0</div>
+                        <div id="footStaff" class="stat-foot">— active staff</div>
+                    </div>
+                </div>
+
+                <!-- ===================== Overview ===================== -->
+                <div class="tab-panel active" data-tab="overview">
+                    <div class="split-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Recent Transactions</h3>
+                                <span class="card-subtitle">Sales &amp; refills · last 20</span>
+                            </div>
+                            <div id="recentTxBody"></div>
+                        </div>
+
+                        <div class="flex-col gap-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Low Stock</h3>
+                                    <span class="card-subtitle">At or below threshold</span>
+                                </div>
+                                <div id="lowStockBody"></div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Top Sellers Today</h3>
+                                    <span class="card-subtitle">By units</span>
+                                </div>
+                                <div id="topSellingBody"></div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Top Refills Today</h3>
+                                    <span class="card-subtitle">By count</span>
+                                </div>
+                                <div id="topRefillsBody"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===================== Products (hierarchy explorer) ===================== -->
+                <div class="tab-panel" data-tab="products">
+                    <div class="explorer">
+                        <!-- Categories column -->
+                        <div class="explorer-col">
+                            <div class="explorer-head">
+                                <h3>Categories</h3>
+                                <button id="addCategoryBtn" class="btn btn-primary btn-sm">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    Add
+                                </button>
+                            </div>
+                            <div id="categoryList" class="explorer-list"></div>
+                        </div>
+
+                        <!-- Brands column -->
+                        <div class="explorer-col">
+                            <div class="explorer-head">
+                                <h3>Brands</h3>
+                                <button id="addBrandBtn" class="btn btn-primary btn-sm" disabled>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    Add
+                                </button>
+                            </div>
+                            <div id="brandList" class="explorer-list"></div>
+                        </div>
+
+                        <!-- Products column -->
+                        <div class="explorer-col explorer-col-wide">
+                            <div class="explorer-head">
+                                <h3 id="productsColTitle">Products</h3>
+                                <button id="addProductBtn" class="btn btn-primary btn-sm" disabled>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    Add product
+                                </button>
+                            </div>
+                            <div id="productList"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===================== Refill Sizes ===================== -->
+                <div class="tab-panel" data-tab="refill-sizes">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Refill Sizes</h3>
+                            <button id="addRefillSizeBtn" class="btn btn-primary btn-sm">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                Add Size
+                            </button>
+                        </div>
+                        <div id="refillSizesBody"></div>
+                    </div>
+                </div>
+
+                <!-- ===================== Purchases ===================== -->
+                <div class="tab-panel" data-tab="purchases">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Record Restock</h3>
+                            <span class="card-subtitle">Adds to product stock</span>
+                        </div>
+                        <div class="card-body">
+                            <form id="purchaseForm">
+                                <div class="field-row">
+                                    <div class="field">
+                                        <label for="purchaseCategory">Category</label>
+                                        <select id="purchaseCategory" class="select" required>
+                                            <option value="">— Select —</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="purchaseBrand">Brand</label>
+                                        <select id="purchaseBrand" class="select" required disabled>
+                                            <option value="">— Select category first —</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="purchaseProduct">Product</label>
+                                        <select id="purchaseProduct" class="select" required disabled>
+                                            <option value="">— Select brand first —</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="field-row">
+                                    <div class="field">
+                                        <label for="purchaseQty">Quantity</label>
+                                        <input type="number" id="purchaseQty" class="input" min="1" step="1" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="purchaseCost">Cost / Unit (PKR)</label>
+                                        <input type="number" id="purchaseCost" class="input" min="0" step="0.01" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="purchaseSupplier">Supplier</label>
+                                        <input type="text" id="purchaseSupplier" class="input" placeholder="Supplier name">
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between gap-3 mt-2" style="flex-wrap:wrap">
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="purchaseUpdateCost">
+                                        <span>Update product's cost price to this value</span>
+                                    </label>
+                                    <button id="purchaseSubmit" class="btn btn-primary" type="submit">
+                                        <span class="spin"></span>
+                                        <span class="btn-label">Record Restock</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Purchase History</h3>
+                            <span class="card-subtitle">Most recent first</span>
+                        </div>
+                        <div id="purchasesBody"></div>
+                    </div>
+                </div>
+
+                <!-- ===================== Staff ===================== -->
+                <div class="tab-panel" data-tab="staff">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Create Staff Account</h3>
+                            <span class="card-subtitle">No financial visibility</span>
+                        </div>
+                        <div class="card-body">
+                            <form id="staffForm">
+                                <div class="field-row">
+                                    <div class="field">
+                                        <label for="staffName">Full Name</label>
+                                        <input type="text" id="staffName" class="input" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="staffEmail">Email</label>
+                                        <input type="email" id="staffEmail" class="input" required>
+                                    </div>
+                                    <div class="field">
+                                        <label for="staffPassword">Password (min 6)</label>
+                                        <input type="password" id="staffPassword" class="input" minlength="6" required>
+                                    </div>
+                                </div>
+                                <div class="text-right mt-2">
+                                    <button id="staffSubmit" class="btn btn-primary" type="submit">
+                                        <span class="spin"></span>
+                                        <span class="btn-label">Create Staff Account</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Team</h3>
+                            <span class="card-subtitle">Active staff &amp; today's performance</span>
+                        </div>
+                        <div id="staffBody"></div>
+                    </div>
+                </div>
+
+                <!-- ===================== Audit ===================== -->
+                <div class="tab-panel" data-tab="audit">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Audit Log</h3>
+                            <span class="card-subtitle">50 entries / page · newest first</span>
+                        </div>
+                        <div id="auditBody"></div>
+                        <div class="pagination">
+                            <span id="auditPageInfo">Loading…</span>
+                            <div class="page-controls">
+                                <button id="auditPrev" class="btn btn-secondary btn-sm">Previous</button>
+                                <button id="auditNext" class="btn btn-secondary btn-sm">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===================== Settings ===================== -->
+                <div class="tab-panel" data-tab="settings">
+                    <div class="card danger-zone">
+                        <div class="card-header">
+                            <h3>Danger Zone — Reset Test Data</h3>
+                            <span class="card-subtitle text-danger">Irreversible</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="warning-text">
+                                <strong>This will permanently delete:</strong> every category,
+                                brand, product, sale, refill, purchase, refill size, and the
+                                full audit log history. Only the five default refill sizes
+                                (1ml, 2ml, 3ml, 5ml, Full Bottle) will be re-seeded.
+                            </p>
+                            <p class="warning-text text-muted">
+                                <strong>This will NOT affect:</strong> the owner account or
+                                any staff accounts.
+                            </p>
+                            <button id="openResetBtn" class="btn btn-danger mt-2">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
+                                Reset Test Data…
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ===================== Modals ===================== -->
+
+    <!-- Category modal -->
+    <div id="categoryModal" class="modal-backdrop" role="dialog" aria-modal="true">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="categoryModalTitle">New Category</h3>
+                <button class="btn-icon" data-close-modal aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="categoryForm">
+                <div class="modal-body">
+                    <div class="field">
+                        <label for="categoryName">Name</label>
+                        <input type="text" id="categoryName" class="input" maxlength="100" required>
+                    </div>
+                    <div class="field">
+                        <label for="categoryDesc">Description (optional)</label>
+                        <input type="text" id="categoryDesc" class="input" maxlength="255">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" data-close-modal>Cancel</button>
+                    <button type="submit" id="categorySubmit" class="btn btn-primary">
+                        <span class="spin"></span>
+                        <span id="categorySubmitLabel" class="btn-label">Create category</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Brand modal -->
+    <div id="brandModal" class="modal-backdrop" role="dialog" aria-modal="true">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="brandModalTitle">New Brand</h3>
+                <button class="btn-icon" data-close-modal aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="brandForm">
+                <div class="modal-body">
+                    <div class="field">
+                        <label for="brandCategory">Category</label>
+                        <select id="brandCategory" class="select" required></select>
+                    </div>
+                    <div class="field">
+                        <label for="brandName">Name</label>
+                        <input type="text" id="brandName" class="input" maxlength="100" required>
+                    </div>
+                    <div class="field">
+                        <label for="brandDesc">Description (optional)</label>
+                        <input type="text" id="brandDesc" class="input" maxlength="255">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" data-close-modal>Cancel</button>
+                    <button type="submit" id="brandSubmit" class="btn btn-primary">
+                        <span class="spin"></span>
+                        <span id="brandSubmitLabel" class="btn-label">Create brand</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product modal -->
+    <div id="productModal" class="modal-backdrop" role="dialog" aria-modal="true">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="productModalTitle">New Product</h3>
+                <button class="btn-icon" data-close-modal aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="productForm">
+                <div class="modal-body">
+                    <div class="field">
+                        <label for="productName">Product Name</label>
+                        <input type="text" id="productName" class="input" maxlength="150" required>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="productCategory">Category</label>
+                            <select id="productCategory" class="select" required></select>
+                        </div>
+                        <div class="field">
+                            <label for="productBrand">Brand</label>
+                            <select id="productBrand" class="select" required disabled></select>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="productCost">Cost Price (PKR)</label>
+                            <input type="number" id="productCost" class="input" min="0" step="0.01" required>
+                        </div>
+                        <div class="field">
+                            <label for="productSell">Selling Price (PKR)</label>
+                            <input type="number" id="productSell" class="input" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="productStock">Stock Quantity</label>
+                            <input type="number" id="productStock" class="input" min="0" step="1" required>
+                        </div>
+                        <div class="field">
+                            <label for="productLow">Low Stock Threshold</label>
+                            <input type="number" id="productLow" class="input" min="0" step="1" value="5">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="checkbox">
+                            <input type="checkbox" id="productRefillable">
+                            <span>This product is refillable (sold by ml from open bottle)</span>
+                        </label>
+                    </div>
+                    <div id="ppmlGroup" class="field hide">
+                        <label for="productPricePerMl">Price per ml (PKR)</label>
+                        <input type="number" id="productPricePerMl" class="input" min="0" step="0.01">
+                    </div>
+                    <div class="field">
+                        <label for="productDesc">Description (optional)</label>
+                        <input type="text" id="productDesc" class="input" maxlength="255">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" data-close-modal>Cancel</button>
+                    <button type="submit" id="productSubmit" class="btn btn-primary">
+                        <span class="spin"></span>
+                        <span id="productSubmitLabel" class="btn-label">Create product</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Refill size modal -->
+    <div id="refillSizeModal" class="modal-backdrop" role="dialog" aria-modal="true">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="refillSizeModalTitle">New Refill Size</h3>
+                <button class="btn-icon" data-close-modal aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="refillSizeForm">
+                <div class="modal-body">
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="refillSizeLabel">Label</label>
+                            <input type="text" id="refillSizeLabel" class="input" maxlength="50" placeholder="e.g. Half Bottle" required>
+                        </div>
+                        <div class="field">
+                            <label for="refillSizeMl">Volume (ml)</label>
+                            <input type="number" id="refillSizeMl" class="input" min="0.1" step="0.1" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" data-close-modal>Cancel</button>
+                    <button type="submit" id="refillSizeSubmit" class="btn btn-primary">
+                        <span class="spin"></span>
+                        <span id="refillSizeSubmitLabel" class="btn-label">Create</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reset confirmation modal -->
+    <div id="resetModal" class="modal-backdrop" role="dialog" aria-modal="true">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="text-danger">Reset Test Data</h3>
+                <button class="btn-icon" data-close-modal aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>You are about to permanently delete all sales, refills, purchases,
+                    and the audit log. Stock quantities for seed products will be reset.</p>
+                <p class="text-muted">This action <strong>cannot be undone</strong>.</p>
+                <div class="field mt-4">
+                    <label for="resetConfirm">Type <strong>RESET</strong> to confirm:</label>
+                    <input type="text" id="resetConfirm" class="input" autocomplete="off" placeholder="RESET">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-ghost" data-close-modal>Cancel</button>
+                <button type="button" id="resetSubmit" class="btn btn-danger" disabled>
+                    <span class="spin"></span>
+                    <span class="btn-label">Reset everything</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/owner.js"></script>
+</body>
+</html>

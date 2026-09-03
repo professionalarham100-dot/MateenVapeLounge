@@ -1,0 +1,20 @@
+{
+    "name": "Mateen VapeLounge",
+    "short_name": "VapeLounge",
+    "description": "Vape Shop Inventory Management",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#0a0a0a",
+    "theme_color": "#f59e0b",
+    "categories": ["business", "productivity"],
+    "icons": [
+        {
+            "src": "/static/icon.svg",
+            "sizes": "192x192 512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}

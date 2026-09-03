@@ -1,0 +1,595 @@
+/* =====================================================================
+   Mateen VapeLounge - Staff Dashboard
+   Clean, focused, no financial data anywhere.
+   ===================================================================== */
+
+.staff-shell {
+    min-height: 100vh;
+    background-color: var(--bg-base);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- Top bar ---------- */
+.staff-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 14px 28px;
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+}
+.staff-topbar .left { justify-self: start; }
+.staff-topbar .center {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 14px;
+}
+.staff-topbar .center .greeting {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+.staff-topbar .right {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.staff-topbar .logout-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all var(--speed) var(--ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.staff-topbar .logout-btn:hover {
+    color: var(--danger);
+    border-color: var(--danger);
+    background: var(--danger-glow);
+}
+
+/* ---------- Layout ---------- */
+.staff-content {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 28px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ---------- Sale card (the prominent one) ---------- */
+.sale-card {
+    background:
+        radial-gradient(1200px 200px at 0% 0%, var(--accent-glow), transparent 60%),
+        var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: visible;
+    position: relative;
+    box-shadow: var(--shadow);
+}
+.sale-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.sale-card .sale-head {
+    padding: 22px 28px 6px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.sale-card .sale-title h2 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+.sale-card .sale-title .subtitle {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.sale-card .sale-form {
+    padding: 14px 28px 28px;
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 14px;
+    align-items: end;
+}
+
+.searchable {
+    position: relative;
+}
+.searchable .input {
+    height: 50px;
+    font-size: 15px;
+    padding-right: 40px;
+}
+.searchable .chevron {
+    position: absolute;
+    right: 14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+.searchable .results {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 25;
+    display: none;
+}
+.searchable .results.open { display: block; }
+.searchable .results .row {
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background-color var(--speed) var(--ease);
+}
+.searchable .results .row:last-child { border-bottom: none; }
+.searchable .results .row:hover,
+.searchable .results .row.active {
+    background: var(--bg-elevated);
+}
+.searchable .results .row .pname {
+    font-weight: 600;
+    font-size: 14px;
+}
+.searchable .results .row .pcat {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.searchable .results .row .pstock {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+.searchable .results .row.out .pstock { color: var(--danger); }
+.searchable .results .empty {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.sale-form .qty-input { height: 50px; font-size: 16px; text-align: center; }
+.sale-form .submit {
+    height: 50px;
+    padding: 0 26px;
+    font-weight: 700;
+    font-size: 14.5px;
+}
+
+.sale-feedback {
+    margin: 0 28px 22px;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    background: var(--success-glow);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: #bbf7d0;
+    font-size: 13.5px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    animation: pageFade 220ms var(--ease);
+}
+.sale-feedback.show { display: flex; }
+.sale-feedback.error {
+    background: var(--danger-glow);
+    border-color: rgba(239,68,68,0.3);
+    color: #fecaca;
+}
+
+/* ---------- Today's sales table ---------- */
+.my-sales {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+.my-sales .summary-strip {
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.my-sales .summary-strip .stat-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.my-sales .summary-strip .stat-mini .label {
+    color: var(--text-muted);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.my-sales .summary-strip .stat-mini .value {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* ---------- Stock grid ---------- */
+.stock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+.stock-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color var(--speed) var(--ease),
+                transform var(--speed) var(--ease);
+}
+.stock-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+}
+.stock-card .row-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+}
+.stock-card .name {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.35;
+}
+.stock-card .stock-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+.stock-card .stock-num.low { color: var(--danger); }
+.stock-card .stock-num.zero { color: var(--text-muted); }
+.stock-card .stock-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Section heading */
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.section-heading h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+}
+.section-heading .meta {
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+    .sale-card .sale-form {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .staff-topbar {
+        grid-template-columns: auto 1fr;
+        padding: 12px 18px;
+    }
+    .staff-topbar .center {
+        display: none;
+    }
+    .staff-content { padding: 20px 18px 60px; }
+}
+
+/* =====================================================================
+   Extended components — refill/sale action cards, stock groups
+   ===================================================================== */
+
+/* ---------- Action toggle (Refill / Sale switcher) ---------- */
+.action-toggle {
+    display: flex;
+    gap: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 6px;
+    align-self: flex-start;
+}
+.action-tab {
+    appearance: none;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color var(--speed) var(--ease),
+                color var(--speed) var(--ease);
+}
+.action-tab:hover { color: var(--text-primary); }
+.action-tab.active {
+    background: var(--accent);
+    color: #1a1000;
+    box-shadow: 0 4px 14px var(--accent-glow-strong);
+}
+
+/* ---------- Action card (Refill / Sale form container) ---------- */
+.action-card {
+    background:
+        radial-gradient(1200px 220px at 0% 0%, var(--accent-glow), transparent 60%),
+        var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.action-head {
+    padding: 22px 28px 6px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.action-head h2 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+.action-head .subtitle {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.action-form {
+    padding: 18px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.step {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+.step-num {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 11px;
+}
+
+/* ---------- Calc panel ---------- */
+.action-calc {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.calc-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+.calc-row .calc-value {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.calc-row.total {
+    border-top: 1px dashed var(--border);
+    padding-top: 8px;
+    margin-top: 4px;
+    font-size: 14px;
+}
+.calc-row.total .calc-label {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.calc-row.total .total-value {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--accent);
+}
+
+/* ---------- Action feedback ---------- */
+.action-feedback {
+    margin: 0 28px 22px;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    background: var(--success-glow);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #bbf7d0;
+    font-size: 13.5px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    animation: pageFade 220ms var(--ease);
+}
+.action-feedback.show { display: flex; }
+.action-feedback.error {
+    background: var(--danger-glow);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #fecaca;
+}
+
+/* ---------- My activity (replaces my-sales) ---------- */
+.my-activity {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+.my-activity .summary-strip {
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.my-activity .summary-strip .stat-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.my-activity .summary-strip .stat-mini .label {
+    color: var(--text-muted);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.my-activity .summary-strip .stat-mini .value {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* ---------- Stock groups (collapsible by category) ---------- */
+.stock-group {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 14px;
+    overflow: hidden;
+}
+.stock-group[open] .caret { transform: rotate(0deg); }
+.stock-group:not([open]) .caret { transform: rotate(-90deg); }
+.stock-group-head {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    border-bottom: 1px solid transparent;
+    transition: background-color var(--speed) var(--ease),
+                border-color var(--speed) var(--ease);
+}
+.stock-group-head::-webkit-details-marker { display: none; }
+.stock-group[open] .stock-group-head { border-bottom-color: var(--border); }
+.stock-group-head:hover { background: var(--bg-elevated); }
+.stock-group-head .caret {
+    display: inline-flex;
+    color: var(--text-secondary);
+    transition: transform var(--speed) var(--ease);
+}
+.stock-group-head .cat-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-primary);
+}
+.stock-group-head .muted {
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.stock-group-body {
+    padding: 14px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.brand-block .brand-head {
+    color: var(--text-secondary);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* Override stock-card row-top to allow refillable badge nicely */
+.stock-card .row-top .name { flex: 1; min-width: 0; }
+
+/* Hide helper */
+.action-card.hide { display: none; }
+.hide { display: none !important; }

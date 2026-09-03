@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Mateen VapeLounge — Sign In</title>
+    <meta name="description" content="Mateen VapeLounge inventory intelligence platform.">
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#f59e0b">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="VapeLounge">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-shell">
+        <!-- Brand panel -->
+        <aside class="login-brand">
+            <div class="top-row">
+                <div class="brand-mark">
+                    <span class="logo-dot" aria-hidden="true"></span>
+                    <span class="brand-text">
+                        Mateen VapeLounge
+                        <small>Inventory Intelligence</small>
+                    </span>
+                </div>
+                <span class="badge badge-dot text-amber">Live</span>
+            </div>
+
+            <div class="hero">
+                <span class="eyebrow">Operator console</span>
+                <h1>Run the floor.<br>Watch every move.</h1>
+                <p class="tagline">
+                    Mateen VapeLounge gives owners full command of stock, sales,
+                    staff, and audit trails — from anywhere, on any device.
+                </p>
+
+                <ul class="feature-list">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Real-time revenue, profit, and stock value
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Every sale, refill, and login on the audit log
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Staff accounts with zero financial exposure
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Installable on your phone — review on the go
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-row">
+                <span>© <span id="brandYear"></span> Mateen VapeLounge</span>
+                <span class="font-mono">v1.0</span>
+            </div>
+        </aside>
+
+        <!-- Login panel -->
+        <main class="login-panel">
+            <section class="login-card">
+                <h2>Welcome back</h2>
+                <p class="subhead">Sign in to your account to continue.</p>
+
+                <div id="loginError" class="auth-error" role="alert"></div>
+
+                <form id="loginForm" novalidate autocomplete="on">
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            class="input"
+                            autocomplete="username"
+                            placeholder="owner@yourdomain.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            class="input"
+                            autocomplete="current-password"
+                            placeholder="Your password"
+                            required
+                        >
+                    </div>
+
+                    <div class="options-row">
+                        <label class="checkbox" for="remember">
+                            <input type="checkbox" id="remember">
+                            <span>Remember email</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="loginSubmit" class="btn btn-primary btn-block">
+                        <span class="spin" aria-hidden="true"></span>
+                        <span class="btn-label">Sign In</span>
+                    </button>
+                </form>
+
+                <p class="meta">Secured · Audit logged · End-to-end</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>document.getElementById('brandYear').textContent = new Date().getFullYear();</script>
+</body>
+</html>
